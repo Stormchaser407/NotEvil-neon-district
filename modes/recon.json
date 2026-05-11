@@ -1,0 +1,42 @@
+{
+  "$schema": "https://neon-district.local/schemas/mode.v1.json",
+  "schema_version": "1.0.0",
+  "name": "Recon",
+  "slug": "recon",
+  "palette": "../palettes/neon-district.json",
+  "description": "Operational mode for OSINT, systems work, monitoring, and command-board workflows on host recon.",
+  "personality": {
+    "visual_identity": "dark control room with neon instrumentation",
+    "energy": "focused, alert, capable",
+    "mood": "beautiful system with teeth",
+    "do_not": [
+      "over-brighten the desktop",
+      "turn alerts into constant Christmas lights",
+      "sacrifice readability for drama",
+      "merge visual intent with hardware execution"
+    ]
+  },
+  "semantic_roles": {
+    "primary": "neon_cyan",
+    "secondary": "dracula_purple",
+    "accent": "hex_magenta",
+    "active": "goblin_green",
+    "alert": "warning_amber",
+    "danger": "blood_red",
+    "background": "void_black",
+    "surface": "district_black",
+    "text": "bone_white",
+    "muted": "muted_lavender"
+  },
+  "intended_surfaces": {
+    "kde_global_theme": true,
+    "plasma_style": true,
+    "konsole_profile": true,
+    "kvantum_theme": true,
+    "aurorae_window_decoration": true,
+    "icon_theme": true,
+    "cursor_theme": true,
+    "wallpaper": true,
+    "rgb_export": true
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://neon-district.local/schemas/steelseries-scene.v1.json",
+  "schema_version": "1.0.0",
+  "name": "Neon District Recon",
+  "slug": "neon-district-recon",
+  "mode": "recon",
+  "palette": "../../../palettes/neon-district.json",
+  "description": "Hardware-agnostic RGB scene export expressing Neon District Recon visual intent. SteelSeries_RGB will later translate this into device-specific packets.",
+  "brightness": {
+    "default": 0.65,
+    "minimum": 0.2,
+    "maximum": 0.85,
+    "notes": "Keep below retina-war-crime levels. RECON is a workstation, not a cursed carnival sign."
+  },
+  "colors": {
+    "background": "#07080D",
+    "primary": "#00F5FF",
+    "secondary": "#BD93F9",
+    "accent": "#FF4FD8",
+    "active": "#50FA7B",
+    "alert": "#FFB86C",
+    "danger": "#FF5555",
+    "text_hint": "#F8F8F2"
+  },
+  "zones": {
+    "keyboard": {
+      "base": {
+        "role": "background",
+        "color": "#07080D",
+        "effect": "static"
+      },
+      "alpha_keys": {
+        "role": "primary",
+        "color": "#00F5FF",
+        "effect": "soft_pulse",
+        "intensity": 0.45
+      },
+      "modifier_keys": {
+        "role": "secondary",
+        "color": "#BD93F9",
+        "effect": "static",
+        "intensity": 0.6
+      },
+      "navigation_keys": {
+        "role": "accent",
+        "color": "#FF4FD8",
+        "effect": "static",
+        "intensity": 0.55
+      },
+      "function_row": {
+        "role": "alert",
+        "color": "#FFB86C",
+        "effect": "low_glow",
+        "intensity": 0.4
+      },
+      "system_keys": {
+        "role": "danger",
+        "color": "#FF5555",
+        "effect": "guarded_static",
+        "intensity": 0.5,
+        "notes": "Reserved for keys that should feel like they have consequences."
+      },
+      "active_layer": {
+        "role": "active",
+        "color": "#50FA7B",
+        "effect": "reactive_confirm",
+        "intensity": 0.7
+      }
+    },
+    "mouse": {
+      "body": {
+        "role": "background",
+        "color": "#07080D",
+        "effect": "static",
+        "intensity": 0.4
+      },
+      "logo": {
+        "role": "primary",
+        "color": "#00F5FF",
+        "effect": "breathing",
+        "intensity": 0.6
+      },
+      "wheel": {
+        "role": "accent",
+        "color": "#FF4FD8",
+        "effect": "static",
+        "intensity": 0.55
+      },
+      "dpi_indicator": {
+        "role": "active",
+        "color": "#50FA7B",
+        "effect": "state_indicator",
+        "intensity": 0.7
+      }
+    }
+  },
+  "integration_boundary": {
+    "neon_district_responsibility": [
+      "define palette",
+      "define mode semantics",
+      "define visual intent",
+      "export hardware-agnostic scenes"
+    ],
+    "steelseries_rgb_responsibility": [
+      "parse exported scenes",
+      "map generic zones to supported devices",
+      "render dry-run previews",
+      "perform guarded hardware writes only after explicit approval"
+    ],
+    "rule": "Do not merge repos. Neon District authors intent; SteelSeries_RGB executes hardware."
+  }
+}

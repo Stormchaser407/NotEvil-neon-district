@@ -1,0 +1,49 @@
+{
+  "$schema": "https://neon-district.local/schemas/palette.v1.json",
+  "schema_version": "1.0.0",
+  "name": "Neon District",
+  "slug": "neon-district",
+  "description": "A Dracula-adjacent dark fantasy-tech palette for cyberpunk control rooms, goblin-engineer dashboards, and beautiful systems with teeth.",
+  "tone": {
+    "core": "dark fantasy-tech",
+    "vibe": "cyberpunk control room",
+    "edge": "slightly dystopian, not bleak; elegant machinery with bite",
+    "operator_notes": "Readable first, theatrical second. Neon should guide attention, not turn the desktop into a radioactive carnival."
+  },
+  "colors": {
+    "void_black": "#07080D",
+    "deep_black": "#0B0F14",
+    "district_black": "#11131A",
+    "terminal_charcoal": "#171A22",
+    "plasma_gray": "#252A36",
+    "dracula_purple": "#BD93F9",
+    "neon_cyan": "#00F5FF",
+    "arc_cyan": "#5AFDFF",
+    "goblin_green": "#50FA7B",
+    "toxic_lime": "#B6FF5C",
+    "hex_magenta": "#FF4FD8",
+    "ritual_pink": "#FF79C6",
+    "warning_amber": "#FFB86C",
+    "blood_red": "#FF5555",
+    "signal_blue": "#8BE9FD",
+    "bone_white": "#F8F8F2",
+    "mist_gray": "#D6D6E7",
+    "muted_lavender": "#A9A2C9",
+    "disabled_gray": "#6272A4"
+  },
+  "semantic_roles": {
+    "background": "void_black",
+    "surface": "district_black",
+    "surface_elevated": "terminal_charcoal",
+    "border": "plasma_gray",
+    "text": "bone_white",
+    "text_muted": "muted_lavender",
+    "primary": "neon_cyan",
+    "secondary": "dracula_purple",
+    "accent": "hex_magenta",
+    "active": "goblin_green",
+    "warning": "warning_amber",
+    "danger": "blood_red",
+    "disabled": "disabled_gray"
+  }
+}
