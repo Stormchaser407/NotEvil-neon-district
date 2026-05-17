@@ -1,0 +1,9 @@
+# Project Forge marker
+slug: neon-district
+project_name: neon-district
+managed_by: project-forge-registry
+embed_status: approved
+safe_default_profile: true
+allow_apply: false
+allow_push: false
+notes: Marker created by approved Project Forge embed apply pilot.
