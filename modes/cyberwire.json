@@ -1,0 +1,42 @@
+{
+  "$schema": "https://neon-district.local/schemas/mode.v1.json",
+  "schema_version": "1.0.0",
+  "name": "CyberWire",
+  "slug": "cyberwire",
+  "palette": "../palettes/neon-district-cyberwire.json",
+  "description": "Neon District terminal and HUD mode for netrunner workflows, command-line sessions, and high-clarity operator screens.",
+  "personality": {
+    "visual_identity": "cyan-heavy intrusion console with disciplined signal glow",
+    "energy": "sharp, wired, and alert",
+    "mood": "jacking into the wire without losing readability",
+    "do_not": [
+      "flatten the palette into generic blue-on-black terminal cosplay",
+      "wash every surface in full-bright cyan",
+      "hide warning or danger states inside the same glow language",
+      "merge visual intent with hardware execution"
+    ]
+  },
+  "semantic_roles": {
+    "primary": "primary_cyan",
+    "secondary": "ghost_cyan",
+    "accent": "threat_pink",
+    "active": "hard_glow_cyan",
+    "alert": "warning_amber",
+    "danger": "threat_pink",
+    "background": "wire_black",
+    "surface": "panel_charcoal",
+    "text": "ghost_cyan",
+    "muted": "neon_purple"
+  },
+  "intended_surfaces": {
+    "kde_global_theme": true,
+    "plasma_style": true,
+    "konsole_profile": true,
+    "kvantum_theme": true,
+    "aurorae_window_decoration": true,
+    "icon_theme": true,
+    "cursor_theme": true,
+    "wallpaper": true,
+    "rgb_export": true
+  }
+}

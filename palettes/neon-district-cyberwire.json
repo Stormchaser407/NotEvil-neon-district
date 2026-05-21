@@ -1,0 +1,44 @@
+{
+  "$schema": "https://neon-district.local/schemas/palette.v1.json",
+  "schema_version": "1.0.0",
+  "name": "Neon District: CyberWire",
+  "slug": "cyberwire",
+  "family": "Neon District",
+  "description": "A cyan-heavy Neon District colorway for terminal HUDs, netrunner interfaces, and command-line work that feels like jacking into the wire.",
+  "tone": {
+    "core": "terminal-first cyberpunk HUD",
+    "vibe": "netrunner command deck",
+    "edge": "cold signal glow, high clarity, and just enough threat to feel alive",
+    "operator_notes": "CyberWire should read like a disciplined intrusion console. Let cyan lead, keep the surfaces dark, and use pink or amber as deliberate interrupts rather than constant noise."
+  },
+  "colors": {
+    "wire_black": "#05070E",
+    "deep_panel": "#0B0F1A",
+    "panel_charcoal": "#111827",
+    "primary_cyan": "#00F5FF",
+    "hard_glow_cyan": "#00FFFF",
+    "ghost_cyan": "#8BE9FD",
+    "threat_pink": "#FF2A6D",
+    "neon_purple": "#BD93F9",
+    "warning_amber": "#FFB000",
+    "selection_background": "#00F5FF",
+    "selection_foreground": "#070A12"
+  },
+  "semantic_roles": {
+    "background": "wire_black",
+    "surface": "panel_charcoal",
+    "surface_elevated": "deep_panel",
+    "border": "primary_cyan",
+    "text": "ghost_cyan",
+    "text_muted": "neon_purple",
+    "text_intense": "hard_glow_cyan",
+    "primary": "primary_cyan",
+    "secondary": "ghost_cyan",
+    "accent": "threat_pink",
+    "active": "hard_glow_cyan",
+    "warning": "warning_amber",
+    "danger": "threat_pink",
+    "selection_background": "selection_background",
+    "selection_foreground": "selection_foreground"
+  }
+}

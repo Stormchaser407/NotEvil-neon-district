@@ -45,19 +45,33 @@ It should support:
 
 This is the visual language layer. It defines intent before execution.
 
+## Official Colorways
+
+Neon District is the family name.
+
+Official colorways currently include:
+
+- `Neon District` as the original default palette and theme foundation
+- `Neon District: CyberWire` as a cyan-heavy terminal, HUD, and netrunner-oriented variant
+
+CyberWire is not a separate project. It is a second official Neon District colorway for command-line, intrusion-console, and heads-up-display styling.
+
 ## First Playable State
 
 Current foundational files:
 
 - `palettes/neon-district.json`
+- `palettes/neon-district-cyberwire.json`
+- `modes/cyberwire.json`
 - `modes/recon.json`
+- `exports/steelseries/scenes/neon-district-cyberwire.json`
 - `exports/steelseries/scenes/neon-district-recon.json`
 - `docs/ROADMAP.md`
 - `docs/integrations/steelseries-rgb-sync-roadmap.md`
 
 These files define:
 
-- canonical colors
+- canonical colors and official colorways
 - semantic mode roles
 - hardware-agnostic RGB scene intent
 - development phases

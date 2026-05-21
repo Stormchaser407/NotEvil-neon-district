@@ -1,0 +1,112 @@
+{
+  "$schema": "https://neon-district.local/schemas/steelseries-scene.v1.json",
+  "schema_version": "1.0.0",
+  "name": "Neon District: CyberWire",
+  "slug": "neon-district-cyberwire",
+  "mode": "cyberwire",
+  "palette": "../../../palettes/neon-district-cyberwire.json",
+  "description": "Hardware-agnostic RGB scene export expressing the Neon District CyberWire colorway as a cyan-heavy HUD and terminal interface.",
+  "brightness": {
+    "default": 0.62,
+    "minimum": 0.18,
+    "maximum": 0.82,
+    "notes": "Bright enough to feel like live signal glass, not bright enough to interrogate your retinas."
+  },
+  "colors": {
+    "background": "#05070E",
+    "primary": "#00F5FF",
+    "secondary": "#8BE9FD",
+    "accent": "#FF2A6D",
+    "active": "#00FFFF",
+    "alert": "#FFB000",
+    "danger": "#FF2A6D",
+    "text_hint": "#8BE9FD"
+  },
+  "zones": {
+    "keyboard": {
+      "base": {
+        "role": "background",
+        "color": "#05070E",
+        "effect": "static"
+      },
+      "alpha_keys": {
+        "role": "primary",
+        "color": "#00F5FF",
+        "effect": "soft_pulse",
+        "intensity": 0.5
+      },
+      "modifier_keys": {
+        "role": "secondary",
+        "color": "#8BE9FD",
+        "effect": "static",
+        "intensity": 0.58
+      },
+      "navigation_keys": {
+        "role": "active",
+        "color": "#00FFFF",
+        "effect": "low_glow",
+        "intensity": 0.62
+      },
+      "function_row": {
+        "role": "alert",
+        "color": "#FFB000",
+        "effect": "static",
+        "intensity": 0.42
+      },
+      "system_keys": {
+        "role": "danger",
+        "color": "#FF2A6D",
+        "effect": "guarded_static",
+        "intensity": 0.48,
+        "notes": "Use threat pink as an interrupt signal, not a wallpaper."
+      },
+      "active_layer": {
+        "role": "active",
+        "color": "#00FFFF",
+        "effect": "reactive_confirm",
+        "intensity": 0.72
+      }
+    },
+    "mouse": {
+      "body": {
+        "role": "background",
+        "color": "#0B0F1A",
+        "effect": "static",
+        "intensity": 0.38
+      },
+      "logo": {
+        "role": "primary",
+        "color": "#00F5FF",
+        "effect": "breathing",
+        "intensity": 0.64
+      },
+      "wheel": {
+        "role": "secondary",
+        "color": "#8BE9FD",
+        "effect": "static",
+        "intensity": 0.56
+      },
+      "dpi_indicator": {
+        "role": "active",
+        "color": "#00FFFF",
+        "effect": "state_indicator",
+        "intensity": 0.7
+      }
+    }
+  },
+  "integration_boundary": {
+    "neon_district_responsibility": [
+      "define palette",
+      "define mode semantics",
+      "define visual intent",
+      "export hardware-agnostic scenes"
+    ],
+    "steelseries_rgb_responsibility": [
+      "parse exported scenes",
+      "map generic zones to supported devices",
+      "render dry-run previews",
+      "perform guarded hardware writes only after explicit approval"
+    ],
+    "rule": "Do not merge repos. Neon District authors intent; SteelSeries_RGB executes hardware."
+  }
+}

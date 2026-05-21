@@ -31,6 +31,7 @@ If Neon District starts doing packet work, the theme repo becomes a swamp. If St
 Neon District owns:
 
 - canonical palette files
+- official colorways within the Neon District family
 - mode definitions
 - semantic color roles
 - visual tone
@@ -42,8 +43,16 @@ Neon District owns:
 Primary files:
 
 - `palettes/neon-district.json`
+- `palettes/neon-district-cyberwire.json`
+- `modes/cyberwire.json`
 - `modes/recon.json`
+- `exports/steelseries/scenes/neon-district-cyberwire.json`
 - `exports/steelseries/scenes/neon-district-recon.json`
+
+Current family structure:
+
+- `Neon District` is the original default palette and theme foundation
+- `Neon District: CyberWire` is the cyan-heavy terminal and HUD colorway for netrunner-style operator work
 
 ## SteelSeries_RGB Responsibilities
 
@@ -126,6 +135,8 @@ Neon District scene exports should remain:
 - hardware-agnostic
 - strict enough for validation
 - loose enough for future devices
+
+That applies to colorways too. CyberWire should reuse the same contract as the original Neon District exports rather than inventing a separate integration model.
 
 SteelSeries_RGB should be allowed to reject invalid scenes loudly and clearly.
 

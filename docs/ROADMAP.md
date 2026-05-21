@@ -4,6 +4,17 @@ Neon District is a portable desktop identity system: part KDE global theme, part
 
 It is not just a theme. It is the visual operating doctrine for RECON.
 
+## Official Colorway Direction
+
+Neon District is the family.
+
+Current official colorways:
+
+- `Neon District` as the original default palette and theme foundation
+- `Neon District: CyberWire` as the cyan-heavy terminal, HUD, and netrunner variant
+
+CyberWire is a colorway inside Neon District, not a separate project line.
+
 ## Style North Star
 
 Neon District should feel like:
@@ -23,7 +34,10 @@ Goal: define the visual intent in clean, portable files.
 Deliverables:
 
 - `palettes/neon-district.json`
+- `palettes/neon-district-cyberwire.json`
+- `modes/cyberwire.json`
 - `modes/recon.json`
+- `exports/steelseries/scenes/neon-district-cyberwire.json`
 - `exports/steelseries/scenes/neon-district-recon.json`
 - `docs/ROADMAP.md`
 - `docs/integrations/steelseries-rgb-sync-roadmap.md`
@@ -34,6 +48,7 @@ Success criteria:
 - JSON validates.
 - Files are human-readable.
 - Files are Codex-readable.
+- The original Neon District palette remains intact while official colorways can expand.
 - No hardware writes.
 - No SteelSeries_RGB repo changes.
 - Neon District owns visual intent only.
@@ -57,6 +72,7 @@ Rules:
 - Prefer modular files.
 - Keep generated assets separated from source intent.
 - Keep palette names stable.
+- Treat official colorways as extensions of Neon District, not forks of the project identity.
 - Avoid hardcoding one machine-specific path into portable theme files.
 
 ## Phase 3 — Icon System
@@ -89,7 +105,7 @@ Goal: export visual intent to external hardware systems without merging repos.
 
 Neon District will define:
 
-- palette
+- palette families and official colorways
 - semantic roles
 - modes
 - scenes
