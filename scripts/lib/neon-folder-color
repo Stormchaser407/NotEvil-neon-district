@@ -1,0 +1,342 @@
+#!/usr/bin/env bash
+set -u
+
+SELF="$(readlink -f "$0")"
+LOGDIR="$HOME/.cache/neon-folder-color"
+LOG="$LOGDIR/actions.log"
+mkdir -p "$LOGDIR"
+
+log() {
+  printf '[%s] %s\n' "$(date '+%F %T')" "$*" >> "$LOG"
+}
+
+notify() {
+  local title="${1:-Neon District Folder Color}"
+  local body="${2:-Done}"
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send "$title" "$body" 2>/dev/null || true
+  fi
+}
+
+usage() {
+  echo "Usage:"
+  echo "  neon-folder-color ICON_NAME folder..."
+  echo "  neon-folder-color --reset folder..."
+  echo "  neon-folder-color --root-apply ICON_NAME folder..."
+  echo "  neon-folder-color --root-reset folder..."
+}
+
+decode_target() {
+  local raw="$1"
+
+  if [[ "$raw" == file://* ]]; then
+    python3 - "$raw" <<'PY'
+import sys
+from urllib.parse import urlparse, unquote
+
+u = sys.argv[1]
+parsed = urlparse(u)
+print(unquote(parsed.path))
+PY
+  else
+    printf '%s\n' "$raw"
+  fi
+}
+
+refresh_folder_metadata() {
+  local raw="$1"
+  local dir
+  dir="$(decode_target "$raw")"
+
+  [ -d "$dir" ] || return 0
+
+  # Nudge KDE/Dolphin cache by touching the folder metadata and parent listing.
+  touch "$dir" 2>/dev/null || true
+  touch "$dir/.directory" 2>/dev/null || true
+
+  local parent
+  parent="$(dirname "$dir")"
+  touch "$parent" 2>/dev/null || true
+
+  log "metadata refresh nudge dir='$dir' parent='$parent'"
+}
+
+refresh_dolphin_views() {
+  log "attempting Dolphin DBus refresh"
+
+  # Trigger Dolphin's built-in Reload action for any open Dolphin windows.
+  if command -v qdbus >/dev/null 2>&1; then
+    qdbus 2>/dev/null \
+      | grep -E '^ org\.kde\.dolphin|^org\.kde\.dolphin' \
+      | sed 's/^ *//' \
+      | while read -r svc; do
+          qdbus "$svc" 2>/dev/null \
+            | grep -E '/actions/(reload|refresh)$' \
+            | while read -r action_path; do
+                qdbus "$svc" "$action_path" trigger >/dev/null 2>&1 \
+                  && log "triggered reload action svc='$svc' path='$action_path'" \
+                  || log "failed reload action svc='$svc' path='$action_path'"
+              done
+        done
+  fi
+
+  # Fallback: ask KDE service cache to refresh. Cheap enough, but not relied on.
+  if command -v kbuildsycoca6 >/dev/null 2>&1; then
+    kbuildsycoca6 --noincremental >/dev/null 2>&1 || true
+    log "ran kbuildsycoca6 refresh"
+  elif command -v kbuildsycoca5 >/dev/null 2>&1; then
+    kbuildsycoca5 --noincremental >/dev/null 2>&1 || true
+    log "ran kbuildsycoca5 refresh"
+  fi
+}
+
+patch_directory_file() {
+  local raw="$1"
+  local icon="$2"
+  local dir
+  dir="$(decode_target "$raw")"
+
+  log "patch request raw='$raw' decoded='$dir' icon='$icon'"
+
+  if [ ! -d "$dir" ]; then
+    log "skip non-directory decoded='$dir'"
+    return 0
+  fi
+
+  local meta="$dir/.directory"
+  local tmp="$meta.tmp.$$"
+
+  if [ -f "$meta" ]; then
+    awk '
+      BEGIN { in_desktop=0; icon_written=0; desktop_seen=0 }
+      /^\[Desktop Entry\]/ {
+        print
+        in_desktop=1
+        desktop_seen=1
+        next
+      }
+      /^\[/ && $0 !~ /^\[Desktop Entry\]/ {
+        if (in_desktop && !icon_written) {
+          print "Icon='"$icon"'"
+          icon_written=1
+        }
+        in_desktop=0
+        print
+        next
+      }
+      /^Icon=/ && in_desktop {
+        if (!icon_written) {
+          print "Icon='"$icon"'"
+          icon_written=1
+        }
+        next
+      }
+      { print }
+      END {
+        if (!desktop_seen) {
+          print "[Desktop Entry]"
+          print "Icon='"$icon"'"
+        } else if (in_desktop && !icon_written) {
+          print "Icon='"$icon"'"
+        }
+      }
+    ' "$meta" > "$tmp"
+  else
+    {
+      echo "[Desktop Entry]"
+      echo "Icon=$icon"
+    } > "$tmp"
+  fi
+
+  mv "$tmp" "$meta"
+  chmod 644 "$meta" 2>/dev/null || true
+
+  refresh_folder_metadata "$dir"
+
+  log "applied icon='$icon' dir='$dir' meta='$meta'"
+  echo "Applied $icon to $dir"
+}
+
+reset_directory_file() {
+  local raw="$1"
+  local dir
+  dir="$(decode_target "$raw")"
+
+  log "reset request raw='$raw' decoded='$dir'"
+
+  if [ ! -d "$dir" ]; then
+    log "skip reset non-directory decoded='$dir'"
+    return 0
+  fi
+
+  local meta="$dir/.directory"
+  local tmp="$meta.tmp.$$"
+
+  if [ ! -f "$meta" ]; then
+    log "no .directory to reset dir='$dir'"
+    echo "No custom .directory file to reset: $dir"
+    return 0
+  fi
+
+  awk '
+    BEGIN { in_desktop=0 }
+    /^\[Desktop Entry\]/ { in_desktop=1; print; next }
+    /^\[/ && $0 !~ /^\[Desktop Entry\]/ { in_desktop=0; print; next }
+    /^Icon=/ && in_desktop { next }
+    { print }
+  ' "$meta" > "$tmp"
+
+  mv "$tmp" "$meta"
+
+  if ! grep -qvE '^\[Desktop Entry\]$|^$' "$meta"; then
+    rm -f "$meta"
+  fi
+
+  refresh_folder_metadata "$dir"
+
+  log "reset icon dir='$dir'"
+  echo "Reset folder icon: $dir"
+}
+
+can_write_folder_metadata() {
+  local raw="$1"
+  local dir
+  dir="$(decode_target "$raw")"
+
+  [ -d "$dir" ] || return 1
+
+  if [ -f "$dir/.directory" ]; then
+    [ -w "$dir/.directory" ] && [ -w "$dir" ]
+  else
+    [ -w "$dir" ]
+  fi
+}
+
+run_admin_apply() {
+  local icon="$1"
+  shift
+
+  log "admin apply needed icon='$icon' targets='$*'"
+
+  if command -v pkexec >/dev/null 2>&1; then
+    notify "Neon District Folder Color" "Admin permission needed for protected folder."
+    pkexec "$SELF" --root-apply "$icon" "$@"
+  else
+    notify "Neon District Folder Color" "pkexec not found. Cannot elevate."
+    log "ERROR pkexec not found"
+    exit 1
+  fi
+}
+
+run_admin_reset() {
+  log "admin reset needed targets='$*'"
+
+  if command -v pkexec >/dev/null 2>&1; then
+    notify "Neon District Folder Color" "Admin permission needed for protected folder."
+    pkexec "$SELF" --root-reset "$@"
+  else
+    notify "Neon District Folder Color" "pkexec not found. Cannot elevate."
+    log "ERROR pkexec not found"
+    exit 1
+  fi
+}
+
+main() {
+  log "invoked as: $SELF $*"
+
+  local mode="${1:-}"
+  shift || true
+
+  if [ -z "$mode" ]; then
+    usage
+    log "no mode supplied"
+    exit 1
+  fi
+
+  if [ "$mode" = "--root-apply" ]; then
+    local icon="${1:-}"
+    shift || true
+
+    if [ -z "$icon" ]; then
+      usage
+      log "root apply missing icon"
+      exit 1
+    fi
+
+    for target in "$@"; do
+      patch_directory_file "$target" "$icon"
+    done
+
+    refresh_dolphin_views
+    notify "Neon District Folder Color" "Applied protected folder color."
+    exit 0
+  fi
+
+  if [ "$mode" = "--root-reset" ]; then
+    for target in "$@"; do
+      reset_directory_file "$target"
+    done
+
+    refresh_dolphin_views
+    notify "Neon District Folder Color" "Reset protected folder icon."
+    exit 0
+  fi
+
+  if [ "$mode" = "--reset" ]; then
+    local normal_targets=()
+    local admin_targets=()
+
+    for target in "$@"; do
+      if can_write_folder_metadata "$target"; then
+        normal_targets+=("$target")
+      else
+        admin_targets+=("$target")
+      fi
+    done
+
+    for target in "${normal_targets[@]}"; do
+      reset_directory_file "$target"
+    done
+
+    if [ "${#admin_targets[@]}" -gt 0 ]; then
+      run_admin_reset "${admin_targets[@]}"
+    fi
+
+    refresh_dolphin_views
+    notify "Neon District Folder Color" "Reset folder icon."
+    exit 0
+  fi
+
+  local icon="$mode"
+  local normal_targets=()
+  local admin_targets=()
+
+  for target in "$@"; do
+    if can_write_folder_metadata "$target"; then
+      normal_targets+=("$target")
+    else
+      admin_targets+=("$target")
+    fi
+  done
+
+  log "normal_targets=${#normal_targets[@]} admin_targets=${#admin_targets[@]} icon='$icon'"
+
+  for target in "${normal_targets[@]}"; do
+    patch_directory_file "$target" "$icon"
+  done
+
+  if [ "${#admin_targets[@]}" -gt 0 ]; then
+    run_admin_apply "$icon" "${admin_targets[@]}"
+  fi
+
+  refresh_dolphin_views
+
+  if [ "${#normal_targets[@]}" -gt 0 ]; then
+    notify "Neon District Folder Color" "Applied $icon to ${#normal_targets[@]} folder(s)."
+  else
+    notify "Neon District Folder Color" "No writable folder target received."
+    log "no writable normal target received"
+  fi
+}
+
+main "$@"

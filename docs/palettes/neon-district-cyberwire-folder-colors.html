@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neon District: CyberWire Folder Colors</title>
+  <style>
+    :root {
+      --background: #05070E;
+      --panel: #111827;
+      --text: #DDF7FF;
+      --muted: #8BE9FD;
+      --cyan: #00F5FF;
+      --amber: #FFB000;
+      --border: #00F5FF55;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 32px;
+      background: var(--background);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      color: var(--cyan);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      letter-spacing: 0;
+      text-shadow: 0 0 18px #00F5FF66;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px;
+    }
+
+    .swatch {
+      min-height: 92px;
+      border: 1px solid #FFFFFF33;
+      border-radius: 6px;
+      margin-bottom: 14px;
+    }
+
+    .swatch.void {
+      border-color: var(--cyan);
+      box-shadow: inset 0 0 0 1px #8BE9FD66, 0 0 24px #00F5FF77;
+    }
+
+    h2 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    code {
+      color: var(--amber);
+      overflow-wrap: anywhere;
+    }
+
+    .rgb,
+    .meaning {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Neon District: CyberWire Folder Colors</h1>
+      <p class="subtitle">A KDE Dolphin folder color language for active work, reference, danger, visual work, review, shipped state, archives, and system folders.</p>
+    </header>
+
+    <section class="grid" aria-label="CyberWire folder color swatches">
+      <article class="card">
+        <div class="swatch" style="background: #00F5FF;"></div>
+        <h2>CyberWire Cyan</h2>
+        <code>#00F5FF</code>
+        <p class="rgb">RGB: 0, 245, 255</p>
+        <p class="meaning">Active / operator / dev</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #8BE9FD;"></div>
+        <h2>Ghost Cyan</h2>
+        <code>#8BE9FD</code>
+        <p class="rgb">RGB: 139, 233, 253</p>
+        <p class="meaning">Docs / reference / notes</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #FF2A6D;"></div>
+        <h2>Threat Pink</h2>
+        <code>#FF2A6D</code>
+        <p class="rgb">RGB: 255, 42, 109</p>
+        <p class="meaning">Danger / broken / urgent</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #BD93F9;"></div>
+        <h2>Neon Purple</h2>
+        <code>#BD93F9</code>
+        <p class="rgb">RGB: 189, 147, 249</p>
+        <p class="meaning">Creative / themes / visual work</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #FFB000;"></div>
+        <h2>Warning Amber</h2>
+        <code>#FFB000</code>
+        <p class="rgb">RGB: 255, 176, 0</p>
+        <p class="meaning">Pending / review / staging</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #00FF9D;"></div>
+        <h2>Poison Green</h2>
+        <code>#00FF9D</code>
+        <p class="rgb">RGB: 0, 255, 157</p>
+        <p class="meaning">Stable / validated / shipped</p>
+      </article>
+      <article class="card">
+        <div class="swatch void" style="background: #05070E;"></div>
+        <h2>Void Black</h2>
+        <code>#05070E</code>
+        <p class="rgb">RGB: 5, 7, 14</p>
+        <p class="meaning">Archive / vault / cold storage</p>
+      </article>
+      <article class="card">
+        <div class="swatch" style="background: #111827;"></div>
+        <h2>Panel Charcoal</h2>
+        <code>#111827</code>
+        <p class="rgb">RGB: 17, 24, 39</p>
+        <p class="meaning">System / config / neutral</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

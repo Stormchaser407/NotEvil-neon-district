@@ -128,3 +128,9 @@ Future targets may include:
 - RGB scene exports for multiple hardware systems
 
 The identity should survive the trip.
+
+## KDE Dolphin Folder Colors
+
+Neon District: CyberWire includes a KDE Dolphin service menu for applying CyberWire folder icons from the right-click menu.
+
+See `docs/CYBERWIRE_DOLPHIN_FOLDER_COLORS.md` for install, uninstall, usage, troubleshooting, and palette details.

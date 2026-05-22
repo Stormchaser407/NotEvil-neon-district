@@ -1,0 +1,53 @@
+[Desktop Entry]
+Type=Service
+MimeType=inode/directory;
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Actions=CyberWireCyan;GhostCyan;ThreatPink;NeonPurple;WarningAmber;PoisonGreen;VoidBlack;PanelCharcoal;ResetFolderIcon;
+X-KDE-Submenu=Neon District Folder Color
+X-KDE-Priority=TopLevel
+Icon=neon-folder-cyberwire-cyan
+
+[Desktop Action CyberWireCyan]
+Name=CyberWire Cyan - Active / Operator / Dev
+Icon=neon-folder-cyberwire-cyan
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-cyberwire-cyan %U
+
+[Desktop Action GhostCyan]
+Name=Ghost Cyan - Docs / Reference
+Icon=neon-folder-ghost-cyan
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-ghost-cyan %U
+
+[Desktop Action ThreatPink]
+Name=Threat Pink - Danger / Broken / Urgent
+Icon=neon-folder-threat-pink
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-threat-pink %U
+
+[Desktop Action NeonPurple]
+Name=Neon Purple - Creative / Themes
+Icon=neon-folder-neon-purple
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-neon-purple %U
+
+[Desktop Action WarningAmber]
+Name=Warning Amber - Pending / Review / Staging
+Icon=neon-folder-warning-amber
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-warning-amber %U
+
+[Desktop Action PoisonGreen]
+Name=Poison Green - Stable / Validated / Shipped
+Icon=neon-folder-poison-green
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-poison-green %U
+
+[Desktop Action VoidBlack]
+Name=Void Black - Archive / Vault / Cold Storage
+Icon=neon-folder-void-black
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-void-black %U
+
+[Desktop Action PanelCharcoal]
+Name=Panel Charcoal - System / Config / Neutral
+Icon=neon-folder-panel-charcoal
+Exec=@HOME@/.local/bin/neon-folder-color neon-folder-panel-charcoal %U
+
+[Desktop Action ResetFolderIcon]
+Name=Reset Folder Icon
+Icon=edit-undo
+Exec=@HOME@/.local/bin/neon-folder-color --reset %U

@@ -1,0 +1,61 @@
+{
+  "name": "Neon District: CyberWire - KDE Dolphin Folder Colors",
+  "colors": [
+    {
+      "name": "CyberWire Cyan",
+      "icon": "neon-folder-cyberwire-cyan",
+      "hex": "#00F5FF",
+      "rgb": [0, 245, 255],
+      "meaning": "Active / operator / dev"
+    },
+    {
+      "name": "Ghost Cyan",
+      "icon": "neon-folder-ghost-cyan",
+      "hex": "#8BE9FD",
+      "rgb": [139, 233, 253],
+      "meaning": "Docs / reference / notes"
+    },
+    {
+      "name": "Threat Pink",
+      "icon": "neon-folder-threat-pink",
+      "hex": "#FF2A6D",
+      "rgb": [255, 42, 109],
+      "meaning": "Danger / broken / urgent"
+    },
+    {
+      "name": "Neon Purple",
+      "icon": "neon-folder-neon-purple",
+      "hex": "#BD93F9",
+      "rgb": [189, 147, 249],
+      "meaning": "Creative / themes / visual work"
+    },
+    {
+      "name": "Warning Amber",
+      "icon": "neon-folder-warning-amber",
+      "hex": "#FFB000",
+      "rgb": [255, 176, 0],
+      "meaning": "Pending / review / staging"
+    },
+    {
+      "name": "Poison Green",
+      "icon": "neon-folder-poison-green",
+      "hex": "#00FF9D",
+      "rgb": [0, 255, 157],
+      "meaning": "Stable / validated / shipped"
+    },
+    {
+      "name": "Void Black",
+      "icon": "neon-folder-void-black",
+      "hex": "#05070E",
+      "rgb": [5, 7, 14],
+      "meaning": "Archive / vault / cold storage"
+    },
+    {
+      "name": "Panel Charcoal",
+      "icon": "neon-folder-panel-charcoal",
+      "hex": "#111827",
+      "rgb": [17, 24, 39],
+      "meaning": "System / config / neutral"
+    }
+  ]
+}
