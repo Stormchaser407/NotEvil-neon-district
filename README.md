@@ -1,3 +1,15 @@
+# Archive notice — 2026-08-19
+
+**Lifecycle:** `superseded`  
+**Disposition:** archive-ready historical source  
+**Canonical replacement:** `Stormchaser407/neon-district`  
+**Reason:** Endgame Experience/theme work now uses the canonical Neon District repository; this older NotEvil-branded repository no longer carries independent implementation authority.  
+**Preservation:** original documentation, palettes, modes, exports, and Git history remain intact below and in repository history; nothing is deleted by this notice.
+
+This repository is intentionally frozen and may be placed under GitHub's repository archive flag. Any future reuse should be harvested through the canonical Neon District lineage rather than reactivating this repository as a competing authority.
+
+---
+
 # Neon District
 
 A portable KDE Plasma global theme project for NixOS/KDE machines.
